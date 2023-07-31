@@ -17,7 +17,7 @@ The SDK of this version is dependent on the third-party HTTP library `requests <
 Running environment
 -------------------
 
-Python 3.6
+Python 3.6+
 
 Installation
 -------------------
@@ -52,25 +52,28 @@ Getting started
         accessKeySecret='<Your AccessKeySecret>')
 
     # Create service.
-    client.create_service('service_name')
+    client.create_service('demo')
 
     zipFileBase64 = ''
-    with zipfile.ZipFile('file.zip', 'r') as archive:
-        content = archive.read()
-        zipFileBase64 = base64.b64encode(content).decode('utf-8')
+    with open('file.zip', 'rb') as f:
+        content = f.read()
+        zipFileBase64 = base64.b64encode(content).decode()
 
     # Create function.
-    client.create_function('service_name', {
-    'functionName':'python3',  
-    'runtime': 'main.my_handler', 
-    'code': {
-        'zipFile': zipFileBase64
-    },
-    'environmentVariables': {'testKey': 'testValue'}
-    })
+    client.create_function('demo', 
+        {
+            'functionName':'test_func',
+            'runtime': 'python3',
+            'handler': 'index.handler',
+            'code': {
+                'zipFile': zipFileBase64
+            },
+            'environmentVariables': {'testKey': 'testValue'}
+        }
+    )
 
     # Invoke function synchronously.
-    client.invoke_function('service_name', 'function_name')
+    client.invoke_function('demo', 'test_func')
 
 More resources
 --------------

@@ -1822,6 +1822,36 @@ class Client(object):
 
         r = self._do_request(method, path, headers, params)
         return FcHttpResponse(r.headers, r.json())
+    
+    def get_layer_version(
+        self, layerName, layerVersion, headers={}
+    ):
+        """
+        GET /layers/{layerName}/versions/{version} HTTP/1.1
+        https://www.alibabacloud.com/help/zh/fc/developer-reference/api-getlayerversion
+        """
+        method = "GET"
+        path = "/{0}/layers/{1}/versions/{2}".format(
+            self.api_version, layerName, layerVersion
+        )
+        headers = self._build_common_headers(method, path, headers)
+        r = self._do_request(method, path, headers)
+        return FcHttpResponse(r.headers, r.json())  
+    
+    def get_layerArn(
+        self, layerArn, headers={}
+    ):
+        """
+        GET /layers/{layerName}/versions/{version} HTTP/1.1
+        https://www.alibabacloud.com/help/zh/fc/developer-reference/api-getlayerversion
+        """
+        method = "GET"
+        path = "/{0}/{}".format(
+            self.api_version, layerArn
+        )
+        headers = self._build_common_headers(method, path, headers)
+        r = self._do_request(method, path, headers)
+        return FcHttpResponse(r.headers, r.json())
 
     def instance_exec(
         self,
