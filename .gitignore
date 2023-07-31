@@ -4,3 +4,5 @@ dist
 aliyun_fc2.egg-info
 .vscode
 .idea/
+pub.sh
+xl_aliyun_fc2.egg-info/
