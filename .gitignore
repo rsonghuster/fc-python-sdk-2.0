@@ -1,0 +1,6 @@
+*.pyc
+build
+dist
+aliyun_fc2.egg-info
+.vscode
+.idea/
